@@ -6,6 +6,10 @@ export default function Authenticate({ token }) {
 
   async function handleClick() {
     try {
+      if (!token) {
+        throw new Error("Token not available. Please sign up first.");
+      }
+
       const response = await fetch(
         "https://fsa-jwt-practice.herokuapp.com/authenticate",
         {

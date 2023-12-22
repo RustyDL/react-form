@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function SignUpForm() {
+export default function SignUpForm({ setToken }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -9,10 +9,14 @@ export default function SignUpForm() {
     event.preventDefault();
 
     try {
+      if (!username || !password) {
+        throw new Error("Username and password are required.");
+      }
+
       const response = await fetch(
         "https://fsa-jwt-practice.herokuapp.com/signup",
         {
-          method: "POST", // Assuming you are using POST for signup
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
@@ -21,7 +25,8 @@ export default function SignUpForm() {
       );
       const result = await response.json();
       console.log(result);
-      // Handle the result as needed, e.g., setToken(result.token);
+
+      setToken(result.token);
     } catch (error) {
       setError(error.message);
     }
