@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Authenticate from "./components/authenticate";
 import SignUpForm from "./components/SignUpForm";
-import "./styles.css"; // Import the CSS file
+import "./app.css";
 
 export default function App() {
   const [token, setToken] = useState(null);
